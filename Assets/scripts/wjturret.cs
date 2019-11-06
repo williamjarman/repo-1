@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class wjturret : MonoBehaviour
 {
+    public GameObject bulletPrefab;
+    public GameObject firepoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +23,16 @@ public class wjturret : MonoBehaviour
             transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
 
         }
+        // spawn bullet on clicks
+        if (Input.GetMouseButtonDown(0))
+        {
+            // spawn bullet 
+            GameObject newBullet = Instantiate(bulletPrefab, firepoint.transform.position, transform.rotation);
+
+            // make bullet move
+            //bullet.rigidbody.addforce(direction);
+            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * 1000f);
+        }
+       
     }
 }

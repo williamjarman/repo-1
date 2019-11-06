@@ -8,8 +8,8 @@ public class wjminion : MonoBehaviour
     public float speed = 5;
 
 
-    
-   
+
+
     private void Start()
     {
         turret = GameObject.Find("turret");
@@ -18,8 +18,33 @@ public class wjminion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(turret.transform.position);
+        if (turret != null)
+        {
+            transform.LookAt(turret.transform.position);
+        }
+
+       
+
+
         transform.position += transform.forward * Time.deltaTime * speed;
-        
+
+    }
+
+
+
+    private void OnCollisionEnter(Collision collision)
+    {   //check its a turret
+        if (collision.gameObject.tag == ("turret"))
+        {
+
+            //hit turret
+            Destroy(collision.gameObject);
+            //delete turret
+            Destroy(gameObject);
+
+        }
+
     }
 }
+
+
